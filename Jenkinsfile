@@ -9,6 +9,12 @@ pipeline {
             }
             steps {
                 echo 'Prepare'
+                dir('code/frontend'){
+                    sh 'npm i '
+                }
+                dir('code/backend'){
+                    sh 'npm i '
+                }
             }
         }
         stage('Build') {
@@ -17,6 +23,12 @@ pipeline {
             }
             steps {
                 echo 'Build'      
+                dir('code/frontend'){
+                    sh 'npm run build '
+                }
+                dir('code/backend'){
+                    sh 'npm run build '
+                }
             }
         }
         stage('Static Analysis') {
