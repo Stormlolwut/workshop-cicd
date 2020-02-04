@@ -73,12 +73,12 @@ pipeline {
             post {
                 always {
                     echo 'Cleanup'
-                }
-                 script {
-                    sh 'docker-compose -f docker-compose-e2e.yml up e2e'
-                    status_code = sh ( script: "docker inspect code_e2e_1 --format='{{.State.ExitCode}}'", returnStdout: true).trim();
-                    if (status_code == '1'){
-                        error('e2e test failed.')
+                    script {
+                        sh 'docker-compose -f docker-compose-e2e.yml up e2e'
+                        status_code = sh ( script: "docker inspect code_e2e_1 --format='{{.State.ExitCode}}'", returnStdout: true).trim();
+                        if (status_code == '1'){
+                            error('e2e test failed.')
+                        }
                     }
                 }
             }
